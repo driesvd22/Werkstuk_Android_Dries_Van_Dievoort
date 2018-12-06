@@ -1,6 +1,8 @@
 package com.example.driesvandievoort.android.DAOs;
 
 import android.arch.persistence.room.Dao;
+import android.arch.persistence.room.Delete;
+import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 
 import com.example.driesvandievoort.android.Entities.User;
@@ -16,6 +18,10 @@ public interface UserDAO {
     @Query("SELECT phoneNumber FROM user WHERE phoneNumber = :phone_number")
     int checkIfUserExists(int phone_number);
 
+    @Insert
+    void insertUser(User... users);
 
+    @Delete
+    void deleteUser(User user);
 
 }
