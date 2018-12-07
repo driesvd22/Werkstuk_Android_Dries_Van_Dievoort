@@ -1,55 +1,50 @@
 package com.example.driesvandievoort.android.Functions;
 
+import android.app.Application;
+import android.arch.lifecycle.AndroidViewModel;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
+import com.example.driesvandievoort.android.DAOs.UserDAO;
 import com.example.driesvandievoort.android.Database.AppDatabase;
 import com.example.driesvandievoort.android.Entities.User;
 
 import java.util.List;
 
-public class DatabaseInitializer {
+public class DatabaseInitializer extends AndroidViewModel {
 
-    private static final String TAG = DatabaseInitializer.class.getName();
+    private static final String TAG = DatabaseInitializer.class.getSimpleName();
+    private UserDAO userDAO;
+    private AppDatabase userDb;
 
-    public static void populateAsync(@NonNull final AppDatabase db) {
-        PopulateDbAsync task = new PopulateDbAsync(db);
-        task.execute();
+    public DatabaseInitializer(Application application){
+        super(application);
+        userDb = AppDatabase.getAppDatabase(application);
+        userDAO = userDb.userDao();
     }
 
-    public static void populateSync(@NonNull final AppDatabase db) {
-        populateWithTestData(db);
+    public void addUser(User user) {
+        new InsertAsyncTask(userDAO).execute(user);
     }
 
-    private static User addUser(final AppDatabase db, User user) {
-        db.userDao().insertUser(user);
-        return user;
+    @Override
+    protected void onCleared() {
+        super.onCleared();
+        Log.i(TAG,"Viewmodel Destroyed");
     }
 
+    private static class InsertAsyncTask extends AsyncTask<User,Void,Void>{
 
-    private static void populateWithTestData(AppDatabase db) {
-        User user = new User();
-        user.setUsername("driesvd");
-        user.setPassword("1234");
-        user.setPhoneNumber("0412345678");
-        addUser(db, user);
+        UserDAO mUserDao;
 
-        List<User> userList = db.userDao().getAll();
-        Log.d(DatabaseInitializer.TAG, "Rows Count: " + ((List) userList).size());
-    }
-
-    private static class PopulateDbAsync extends AsyncTask<Void,Void,Void>{
-
-        private final AppDatabase mDb;
-
-        PopulateDbAsync(AppDatabase db){
-            mDb = db;
+        public InsertAsyncTask(UserDAO mUserDao){
+            this.mUserDao = mUserDao;
         }
 
         @Override
-        protected Void doInBackground(final Void... voids) {
-            populateWithTestData(mDb);
+        protected Void doInBackground(User... users) {
+            mUserDao.insertUser(users[0]);
             return null;
         }
     }
