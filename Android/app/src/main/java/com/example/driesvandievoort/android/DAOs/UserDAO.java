@@ -16,7 +16,7 @@ public interface UserDAO {
     List<User> getAll();
 
     @Query("SELECT phoneNumber FROM user WHERE phoneNumber = :phone_number")
-    int checkIfUserExists(int phone_number);
+    String checkIfUserExists(String phone_number);
 
     @Insert
     void insertUser(User... users);
