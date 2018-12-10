@@ -3,13 +3,10 @@ package com.example.driesvandievoort.android;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import com.example.driesvandievoort.android.DAOs.UserDAO;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,8 +21,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        editUsername = (EditText)findViewById(R.id.editUsername);
-        editPassword = (EditText)findViewById(R.id.editPassword);
+        editUsername = (EditText)findViewById(R.id.inputUsername);
+        editPassword = (EditText)findViewById(R.id.inputPassword);
         btnlogin = (Button)findViewById(R.id.btnLogin);
         btnsignUp = (Button)findViewById(R.id.btnSignupScreen);
 
