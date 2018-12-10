@@ -2,21 +2,20 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/menu_home"
-        android:title="Home"
+        android:title="@string/navHome"
         android:icon="@drawable/ic_home_black_24dp"
         />
     <item
         android:id="@+id/menu_search"
-        android:title="Search"
+        android:title="@string/navSearch"
         android:icon="@drawable/ic_search_black_24dp"
         />
-
     <item
         android:id="@+id/menu_favorites"
-        android:title="Favorites"
+        android:title="@string/navFavorites"
         android:icon="@drawable/ic_favorite_black_24dp" />
     <item
         android:id="@+id/menu_account"
-        android:title="Account"
+        android:title="@string/navAccount"
         android:icon="@drawable/ic_account_circle_black_24dp" />
 </menu>
