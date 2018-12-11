@@ -23,6 +23,8 @@ public class SecondActivity extends AppCompatActivity {
 
         bottomnNav = findViewById(R.id.navigation);
         bottomnNav.setOnNavigationItemSelectedListener(navlistener);
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navlistener =
