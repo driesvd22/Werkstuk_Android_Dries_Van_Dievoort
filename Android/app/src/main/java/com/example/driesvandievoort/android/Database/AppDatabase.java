@@ -9,7 +9,7 @@ import com.example.driesvandievoort.android.DAOs.UserDAO;
 import com.example.driesvandievoort.android.Entities.User;
 
 @Database(entities = {User.class}, version = 1)
-public abstract class AppDatabase extends RoomDatabase {
+public abstract  class AppDatabase extends RoomDatabase {
 
     private static AppDatabase INSTANCE;
 
