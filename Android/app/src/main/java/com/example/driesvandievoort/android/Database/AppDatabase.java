@@ -8,8 +8,8 @@ import android.content.Context;
 import com.example.driesvandievoort.android.DAOs.UserDAO;
 import com.example.driesvandievoort.android.Entities.User;
 
-@Database(entities = {User.class}, version = 1)
-public abstract  class AppDatabase extends RoomDatabase {
+@Database(entities = {User.class}, version = 1, exportSchema = false)
+public abstract class AppDatabase extends RoomDatabase {
 
     private static AppDatabase INSTANCE;
 

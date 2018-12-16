@@ -15,8 +15,11 @@ public interface UserDAO {
     @Query("SELECT * FROM user")
     List<User> getAll();
 
-    @Query("SELECT phoneNumber FROM user WHERE phoneNumber = :phone_number AND username = :username")
-    String checkIfUserExists(String phone_number, String username);
+    @Query("SELECT username FROM user WHERE username = :username AND password = :password")
+    String checkIfUserExists(String username, String password);
+
+    @Query("SELECT username FROM user WHERE username = :username OR phoneNumber = :phoneNumber")
+    String checkIfUserExistsSignUp(String username, String phoneNumber);
 
     @Insert
     void insertUser(User... users);

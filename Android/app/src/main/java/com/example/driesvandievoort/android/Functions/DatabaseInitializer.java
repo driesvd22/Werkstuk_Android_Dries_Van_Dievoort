@@ -16,11 +16,10 @@ public class DatabaseInitializer extends AndroidViewModel {
 
     private static final String TAG = DatabaseInitializer.class.getSimpleName();
     private UserDAO userDAO;
-    private AppDatabase userDb;
 
     public DatabaseInitializer(Application application){
         super(application);
-        userDb = AppDatabase.getAppDatabase(application);
+        AppDatabase userDb = AppDatabase.getAppDatabase(application);
         userDAO = userDb.userDao();
     }
 
@@ -38,7 +37,7 @@ public class DatabaseInitializer extends AndroidViewModel {
 
         UserDAO mUserDao;
 
-        public InsertAsyncTask(UserDAO mUserDao){
+        InsertAsyncTask(UserDAO mUserDao){
             this.mUserDao = mUserDao;
         }
 
