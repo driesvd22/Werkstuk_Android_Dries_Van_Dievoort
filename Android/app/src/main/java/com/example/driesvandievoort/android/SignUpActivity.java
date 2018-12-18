@@ -53,6 +53,14 @@ public class SignUpActivity extends AppCompatActivity {
                 {
                     ik = "";
                 }
+                if (strings[0].isEmpty() || strings[1].isEmpty() || strings[2].isEmpty())
+                {
+                    ik = "ik";
+                }
+                if(ik.equals("ik"))
+                {
+                    return 2;
+                }
                 if (!ik.isEmpty()) {
                     return 0;
                 } else {
@@ -81,7 +89,11 @@ public class SignUpActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "User Created and logged in", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(SignUpActivity.this, HomeActivity.class);
                     startActivity(intent);
-                } else {
+                } else if (integer == 2)
+                {
+                    Toast.makeText(getApplicationContext(), "Make sure fields are filled in", Toast.LENGTH_SHORT).show();
+                }
+                else {
                     Toast.makeText(getApplicationContext(), "User Credentials exist already", Toast.LENGTH_SHORT).show();
 
                 }

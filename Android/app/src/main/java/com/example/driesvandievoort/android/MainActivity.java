@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.example.driesvandievoort.android.Database.AppDatabase;
 import com.example.driesvandievoort.android.Entities.User;
+import com.example.driesvandievoort.android.Varia.Common;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -69,11 +70,21 @@ public class MainActivity extends AppCompatActivity {
 
     private class validateUserAsync extends AsyncTask<String,Integer,Integer>
     {
+        User user;
         @Override
         protected Integer doInBackground(String... strings) {
             String ik = appDatabase.userDao().checkIfUserExists(strings[0], strings[1]);
+            if (ik == null)
+            {
+                ik = "";
+            }
+            if (strings[0] == null || strings[0].isEmpty())
+            {
+                strings[0] = " ";
+            }
             if (ik.equals(strings[0]))
             {
+                user = appDatabase.userDao().getUser(strings[0], strings[1]);
                 return 1;
             }
             else
@@ -93,7 +104,9 @@ public class MainActivity extends AppCompatActivity {
             {
                 Toast.makeText(getApplicationContext(), "Logged in", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                Common.currentUser = user;
                 startActivity(intent);
+                finish();
             }
             else
             {

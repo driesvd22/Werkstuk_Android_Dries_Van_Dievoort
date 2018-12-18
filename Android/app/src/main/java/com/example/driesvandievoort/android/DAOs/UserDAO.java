@@ -18,6 +18,9 @@ public interface UserDAO {
     @Query("SELECT username FROM user WHERE username = :username AND password = :password")
     String checkIfUserExists(String username, String password);
 
+    @Query("SELECT * FROM user WHERE username = :username AND password = :password")
+    User getUser(String username, String password);
+
     @Query("SELECT username FROM user WHERE username = :username OR phoneNumber = :phoneNumber")
     String checkIfUserExistsSignUp(String username, String phoneNumber);
 
