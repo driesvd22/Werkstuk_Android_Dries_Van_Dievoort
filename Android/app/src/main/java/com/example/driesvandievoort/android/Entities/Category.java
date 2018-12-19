@@ -2,9 +2,9 @@ package com.example.driesvandievoort.android.Entities;
 
 public class Category {
     private String Name;
-    private String Image;
+    private int Image;
 
-    public Category(String name, String image) {
+    public Category(String name, int image) {
         Name = name;
         Image = image;
     }
@@ -20,11 +20,11 @@ public class Category {
         Name = name;
     }
 
-    public String getImage() {
+    public int getImage() {
         return Image;
     }
 
-    public void setImage(String image) {
+    public void setImage(int image) {
         Image = image;
     }
 }

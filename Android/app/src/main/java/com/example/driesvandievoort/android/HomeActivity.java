@@ -1,11 +1,8 @@
 package com.example.driesvandievoort.android;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -14,48 +11,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.example.driesvandievoort.android.Entities.Category;
-import com.example.driesvandievoort.android.Varia.Common;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
-    FirebaseDatabase database;
-    DatabaseReference category;
-    TextView textFullName;
-    RecyclerView recyclerView;
-    RecyclerView.LayoutManager layoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("Menu");
         setSupportActionBar(toolbar);
-
-
-        database = FirebaseDatabase.getInstance();
-        category = database.getReference("Category");
-
-
-
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -66,40 +38,22 @@ public class HomeActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        View headerview = navigationView.getHeaderView(0);
-        textFullName = (TextView)headerview.findViewById(R.id.textUsername);
-        String k = "Hello, " + Common.currentUser.getUsername() + "!";
-        textFullName.setText(k);
+        Window w = getWindow();
+        w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
-        recyclerView = (RecyclerView)findViewById(R.id.recycler_menu);
-        recyclerView.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-
-        loadMenu();
-
-    }
-
-
-    private void loadMenu() {
-        FirebaseRecyclerAdapter<Category,MenuViewHolder> adapter = new FirebaseRecyclerAdapter<Category, MenuViewHolder>(Category.class,R.layout.menu_item,MenuViewHolder.class,category) {
-            @Override
-            protected void populateViewHolder(MenuViewHolder viewHolder, Category model, int position) {
-                viewHolder.textMenuName.setText(model.getName());
-                Picasso.with(getBaseContext()).load(model.getImage()).into(viewHolder.imageView);
-                final Category clickItem = model;
-                viewHolder.setItemClickListener(new ItemClickListener() {
-                    @Override
-                    public void onClick(View view, int position, boolean isClick) {
-                        Toast.makeText(HomeActivity.this,clickItem.getName(),Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-        };
+        RecyclerView recyclerView = findViewById(R.id.recyclerview);
+        List<Category> list = new ArrayList<>();
+        list.add(new Category("Finger Foods", R.drawable.fingerfoods));
+        list.add(new Category("traditional", R.drawable.traditional));
+        list.add(new Category("Chinese", R.drawable.chinese));
+        list.add(new Category("Fish", R.drawable.fish));
+        list.add(new Category("Pizza", R.drawable.pizza));
+        list.add(new Category("Vegetarian", R.drawable.vegetarian));
+        list.add(new Category("Pasta", R.drawable.pasta));
+        Adapter adapter = new Adapter(this, list);
         recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
-
-
 
     @Override
     public void onBackPressed() {
@@ -120,7 +74,17 @@ public class HomeActivity extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-       return super.onOptionsItemSelected(item);
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_logout) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
