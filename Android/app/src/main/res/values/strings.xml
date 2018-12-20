@@ -27,4 +27,5 @@
     <string name="action_logout">Logout</string>
     <string name="select">Select</string>
     <string name="name_of_category">Name of Category</string>
+    <string name="categorytitle">CategoryTitle</string>
 </resources>

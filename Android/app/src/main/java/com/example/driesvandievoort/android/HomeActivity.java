@@ -15,6 +15,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.example.driesvandievoort.android.Entities.Category;
+import com.example.driesvandievoort.android.Varia.Adapter;
 
 import java.util.ArrayList;
 import java.util.List;
