@@ -47,8 +47,6 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder> {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context,CategoryActivity.class);
-
-                // passing data to the book activity
                 intent.putExtra("Title",categories.get(i).getName());
                 intent.putExtra("Image",categories.get(i).getImage());
                 //Extra toevoegen om mlee te sturen naar category activity
