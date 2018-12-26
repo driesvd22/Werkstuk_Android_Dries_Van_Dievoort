@@ -45,13 +45,13 @@ public class HomeActivity extends AppCompatActivity
 
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
         List<Category> list = new ArrayList<>();
-        list.add(new Category("Finger Foods", R.drawable.fingerfoods));
-        list.add(new Category("traditional", R.drawable.traditional));
-        list.add(new Category("Chinese", R.drawable.chinese));
-        list.add(new Category("Fish", R.drawable.fish));
-        list.add(new Category("Pizza", R.drawable.pizza));
-        list.add(new Category("Vegetarian", R.drawable.vegetarian));
-        list.add(new Category("Pasta", R.drawable.pasta));
+        list.add(new Category(getString(R.string.FingerFoods), R.drawable.fingerfoods));
+        list.add(new Category(getString(R.string.Traditional), R.drawable.traditional));
+        list.add(new Category(getString(R.string.Chinese), R.drawable.chinese));
+        list.add(new Category(getString(R.string.Fish), R.drawable.fish));
+        list.add(new Category(getString(R.string.Pizza), R.drawable.pizza));
+        list.add(new Category(getString(R.string.Vegetarian), R.drawable.vegetarian));
+        list.add(new Category(getString(R.string.Pasta), R.drawable.pasta));
         Adapter adapter = new Adapter(this, list);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));

@@ -32,4 +32,17 @@
     <string name="map">Map</string>
     <string name="favorites">Favorites</string>
     <string name="logout">Logout</string>
+    <string name="Redirect">Redirecting…</string>
+    <string name="LoggedIn">Logged in</string>
+    <string name="WrongCredentials">Wrong Credentials</string>
+    <string name="UserCreated">User Created and logged in</string>
+    <string name="FiledsFilledIn">Make sure fields are filled in</string>
+    <string name="UserCredExist">User Credentials exist already</string>
+    <string name="FingerFoods">Finger Foods</string>
+    <string name="Traditional">Traditional</string>
+    <string name="Chinese">Chinese</string>
+    <string name="Fish">Fish</string>
+    <string name="Pizza">Pizza</string>
+    <string name="Vegetarian">Vegetarian</string>
+    <string name="Pasta">Pasta</string>
 </resources>

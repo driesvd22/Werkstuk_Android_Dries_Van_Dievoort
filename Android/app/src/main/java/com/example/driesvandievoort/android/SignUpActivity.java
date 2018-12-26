@@ -86,15 +86,15 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             protected void onPostExecute(Integer integer) {
                 if (integer == 1) {
-                    Toast.makeText(getApplicationContext(), "User Created and logged in", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), getString(R.string.UserCreated), Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(SignUpActivity.this, HomeActivity.class);
                     startActivity(intent);
                 } else if (integer == 2)
                 {
-                    Toast.makeText(getApplicationContext(), "Make sure fields are filled in", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), getString(R.string.FiledsFilledIn), Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    Toast.makeText(getApplicationContext(), "User Credentials exist already", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), getString(R.string.UserCredExist), Toast.LENGTH_SHORT).show();
 
                 }
             }

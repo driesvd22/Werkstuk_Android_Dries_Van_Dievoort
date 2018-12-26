@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         btnsignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),"Redirecting...",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),getString(R.string.Redirect),Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
                 startActivity(intent);
             }
@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(Integer integer) {
             if (integer == 1)
             {
-                Toast.makeText(getApplicationContext(), "Logged in", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), getString(R.string.LoggedIn), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MainActivity.this, HomeActivity.class);
                 Common.currentUser = user;
                 startActivity(intent);
@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
             }
             else
             {
-                Toast.makeText(getApplicationContext(), "Wrong Credentials", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), getString(R.string.WrongCredentials), Toast.LENGTH_SHORT).show();
 
             }
         }
