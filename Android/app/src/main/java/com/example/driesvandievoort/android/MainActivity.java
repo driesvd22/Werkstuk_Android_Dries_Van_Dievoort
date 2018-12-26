@@ -1,6 +1,8 @@
 package com.example.driesvandievoort.android;
 
+import android.app.AlertDialog;
 import android.arch.persistence.room.Room;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -67,6 +69,22 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setTitle(getString(R.string.ReallyExit))
+                .setMessage(getString(R.string.ExitSure))
+                .setNegativeButton(getString(R.string.NoExit), null)
+                .setPositiveButton(getString(R.string.YesExit), new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        Intent intent = new Intent(Intent.ACTION_MAIN);
+                        intent.addCategory(Intent.CATEGORY_HOME);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                    }
+                }).create().show();
+    }
 
     private class validateUserAsync extends AsyncTask<String,Integer,Integer>
     {

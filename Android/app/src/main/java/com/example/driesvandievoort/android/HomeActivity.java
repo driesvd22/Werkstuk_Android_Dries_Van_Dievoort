@@ -1,5 +1,7 @@
 package com.example.driesvandievoort.android;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -63,7 +65,16 @@ public class HomeActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            new AlertDialog.Builder(this)
+                    .setTitle(getString(R.string.ReallyExit))
+                    .setMessage(getString(R.string.ExitSure))
+                    .setNegativeButton(getString(R.string.NoExit), null)
+                    .setPositiveButton(getString(R.string.YesExit), new DialogInterface.OnClickListener() {
+
+                        public void onClick(DialogInterface arg0, int arg1) {
+                            HomeActivity.super.onBackPressed();
+                        }
+                    }).create().show();
         }
     }
 

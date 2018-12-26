@@ -45,4 +45,8 @@
     <string name="Pizza">Pizza</string>
     <string name="Vegetarian">Vegetarian</string>
     <string name="Pasta">Pasta</string>
+    <string name="ReallyExit">Really Exit?</string>
+    <string name="ExitSure">Are you sure you want to exit?</string>
+    <string name="NoExit">No</string>
+    <string name="YesExit">Yes</string>
 </resources>

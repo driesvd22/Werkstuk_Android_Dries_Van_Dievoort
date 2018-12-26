@@ -45,4 +45,8 @@
     <string name="Pizza">Pizza</string>
     <string name="Vegetarian">Vegetarisch</string>
     <string name="Pasta">Pasta</string>
+    <string name="ReallyExit">App verlaten?</string>
+    <string name="ExitSure">Ben je zeker dat je de app wilt verlaten?</string>
+    <string name="NoExit">Nee</string>
+    <string name="YesExit">Ja</string>
 </resources>
