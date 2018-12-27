@@ -13,8 +13,12 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.driesvandievoort.android.Database.AppDatabase;
+import com.example.driesvandievoort.android.Entities.Category;
 import com.example.driesvandievoort.android.Entities.User;
 import com.example.driesvandievoort.android.Varia.CurrentUser;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -39,18 +43,6 @@ public class MainActivity extends AppCompatActivity {
         appDatabase = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, DATABASE_NAME)
                 .fallbackToDestructiveMigration()
                 .build();
-
-        /*new Thread(new Runnable() {
-            @Override
-            public void run() {
-                appDatabase.clearAllTables();
-                User user = new User();
-                user.setUsername("admin");
-                user.setPassword("1234");
-                user.setPhoneNumber("0412345678");
-                appDatabase.userDao().insertUser(user);
-            }
-            }).start();*/
 
         btnlogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,6 +83,15 @@ public class MainActivity extends AppCompatActivity {
         User user;
         @Override
         protected Integer doInBackground(String... strings) {
+            /*List<Category> list = new ArrayList<>();
+            list.add(new Category(getString(R.string.FingerFoods), R.drawable.fingerfoods));
+            list.add(new Category(getString(R.string.Traditional), R.drawable.traditional));
+            list.add(new Category(getString(R.string.Chinese), R.drawable.chinese));
+            list.add(new Category(getString(R.string.Fish), R.drawable.fish));
+            list.add(new Category(getString(R.string.Pizza), R.drawable.pizza));
+            list.add(new Category(getString(R.string.Vegetarian), R.drawable.vegetarian));
+            list.add(new Category(getString(R.string.Pasta), R.drawable.pasta));
+            appDatabase.categoryDAO().insertCategory(list.get(0),list.get(1),list.get(2),list.get(3),list.get(4),list.get(5),list.get(6));*/
             String ik = appDatabase.userDao().checkIfUserExists(strings[0], strings[1]);
             if (ik == null)
             {

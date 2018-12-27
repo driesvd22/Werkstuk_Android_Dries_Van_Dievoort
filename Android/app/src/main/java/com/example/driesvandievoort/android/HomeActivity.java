@@ -1,8 +1,10 @@
 package com.example.driesvandievoort.android;
 
 import android.app.AlertDialog;
+import android.arch.persistence.room.Room;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,19 +18,32 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
+import com.example.driesvandievoort.android.Database.AppDatabase;
 import com.example.driesvandievoort.android.Entities.Category;
+import com.example.driesvandievoort.android.Entities.User;
 import com.example.driesvandievoort.android.Varia.Adapter;
+import com.example.driesvandievoort.android.Varia.CurrentUser;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    List<Category> categories = new ArrayList<>();
+    private static final String DATABASE_NAME = "app_db";
+    public AppDatabase appDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        appDatabase = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, DATABASE_NAME)
+                .fallbackToDestructiveMigration()
+                .build();
+
+        new getCategoryList().execute();
         setContentView(R.layout.activity_home);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -46,15 +61,7 @@ public class HomeActivity extends AppCompatActivity
         w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
-        List<Category> list = new ArrayList<>();
-        list.add(new Category(getString(R.string.FingerFoods), R.drawable.fingerfoods));
-        list.add(new Category(getString(R.string.Traditional), R.drawable.traditional));
-        list.add(new Category(getString(R.string.Chinese), R.drawable.chinese));
-        list.add(new Category(getString(R.string.Fish), R.drawable.fish));
-        list.add(new Category(getString(R.string.Pizza), R.drawable.pizza));
-        list.add(new Category(getString(R.string.Vegetarian), R.drawable.vegetarian));
-        list.add(new Category(getString(R.string.Pasta), R.drawable.pasta));
-        Adapter adapter = new Adapter(this, list);
+        Adapter adapter = new Adapter(this, categories);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
@@ -118,4 +125,26 @@ public class HomeActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
+    private class getCategoryList extends AsyncTask<String,Integer,Integer>
+    {
+        User user;
+        @Override
+        protected Integer doInBackground(String... strings) {
+            categories = appDatabase.categoryDAO().getAll();
+            return 1;
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            super.onProgressUpdate(values[0]);
+        }
+
+        @Override
+        protected void onPostExecute(Integer integer) {
+
+        }
+    }
+
 }
