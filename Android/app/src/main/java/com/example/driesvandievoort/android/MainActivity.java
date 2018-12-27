@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import com.example.driesvandievoort.android.Database.AppDatabase;
 import com.example.driesvandievoort.android.Entities.User;
-import com.example.driesvandievoort.android.Varia.Common;
+import com.example.driesvandievoort.android.Varia.CurrentUser;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
             {
                 Toast.makeText(getApplicationContext(), getString(R.string.LoggedIn), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MainActivity.this, HomeActivity.class);
-                Common.currentUser = user;
+                CurrentUser.currentUser = user;
                 startActivity(intent);
                 finish();
             }

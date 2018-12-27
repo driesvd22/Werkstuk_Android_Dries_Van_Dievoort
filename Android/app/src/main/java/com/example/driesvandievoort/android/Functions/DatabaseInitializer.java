@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
+import com.example.driesvandievoort.android.DAOs.CategoryDAO;
 import com.example.driesvandievoort.android.DAOs.UserDAO;
 import com.example.driesvandievoort.android.Database.AppDatabase;
 import com.example.driesvandievoort.android.Entities.User;
@@ -16,11 +17,13 @@ public class DatabaseInitializer extends AndroidViewModel {
 
     private static final String TAG = DatabaseInitializer.class.getSimpleName();
     private UserDAO userDAO;
+    private CategoryDAO categoryDAO;
 
     public DatabaseInitializer(Application application){
         super(application);
-        AppDatabase userDb = AppDatabase.getAppDatabase(application);
-        userDAO = userDb.userDao();
+        AppDatabase appdb = AppDatabase.getAppDatabase(application);
+        userDAO = appdb.userDao();
+        categoryDAO = appdb.categoryDAO();
     }
 
     public void addUser(User user) {
