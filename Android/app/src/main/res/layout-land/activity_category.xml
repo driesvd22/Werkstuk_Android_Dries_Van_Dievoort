@@ -14,22 +14,25 @@
 
         <ImageView
             android:id="@+id/categoryThumbnail"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_width="200dp"
+            android:layout_height="match_parent"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_marginStart="0dp"
-            android:layout_marginTop="49dp"
+            android:layout_marginTop="0dp"
             android:background="#2d2d2d"
             android:scaleType="centerCrop"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="0dp" />
+            android:layout_marginLeft="0dp"
+            android:layout_alignParentLeft="true" />
 
         <TextView
             android:id="@+id/textTitleCategory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginStart="45dp"
+            android:layout_marginLeft="45dp"
             android:layout_marginTop="10dp"
             android:background="#edecec"
             android:padding="8dp"
@@ -41,27 +44,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/categoryThumbnail"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="0dp"
+            android:layout_alignStart="@+id/mapCategory"
+            android:layout_marginTop="41dp"
             android:onClick="onClick"
             android:text="@string/restaurants"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="0dp" />
+            android:layout_alignLeft="@+id/mapCategory" />
 
         <fragment xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:map="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/mapCategory"
             android:name="com.google.android.gms.maps.SupportMapFragment"
-            android:layout_width="match_parent"
-            android:layout_height="320dp"
-            android:layout_alignParentStart="true"
+            android:layout_width="400dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="0dp"
+            android:layout_marginEnd="0dp"
             android:layout_marginBottom="0dp"
             tools:context="com.example.driesvandievoort.android.MapActivity"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="0dp" />
+            android:layout_marginRight="0dp"
+            android:layout_alignParentRight="true" />
 
 
     </RelativeLayout>
