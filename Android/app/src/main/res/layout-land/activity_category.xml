@@ -25,6 +25,23 @@
             android:layout_marginLeft="0dp"
             android:layout_alignParentLeft="true" />
 
+        <Button
+            android:id="@+id/FavoriteButton"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textTitleCategory"
+            android:layout_alignStart="@+id/categoryThumbnail"
+            android:layout_alignLeft="@+id/categoryThumbnail"
+            android:layout_marginStart="53dp"
+            android:layout_marginLeft="53dp"
+            android:layout_marginTop="23dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_toStartOf="@+id/mapCategory"
+            android:layout_toLeftOf="@+id/mapCategory"
+            android:onClick="onClickFavorite"
+            android:text="@string/favorite" />
         <TextView
             android:id="@+id/textTitleCategory"
             android:layout_width="wrap_content"

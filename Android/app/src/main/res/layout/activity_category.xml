@@ -12,6 +12,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <Button
+            android:id="@+id/FavoriteButton"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:onClick="onClickFavorite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/categoryThumbnail"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:text="@string/favorite" />
+
         <ImageView
             android:id="@+id/categoryThumbnail"
             android:layout_width="match_parent"
@@ -23,7 +34,8 @@
             android:background="#2d2d2d"
             android:scaleType="centerCrop"
             android:layout_alignParentLeft="true"
-            android:layout_marginLeft="0dp" />
+            android:layout_marginLeft="0dp"
+            android:contentDescription="@string/categorythumbnail" />
 
         <TextView
             android:id="@+id/textTitleCategory"

@@ -52,4 +52,8 @@
     <string name="restaurants">Restaurants weergeven</string>
     <string name="PermissionDenied">Geen toestemming</string>
     <string name="NearbyRestaurants">Restaurants in de buurt</string>
+    <string name="favorite">Favoriet</string>
+    <string name="categorythumbnail">categorie foto</string>
+    <string name="favoriteSaved">Favoriet opgeslagen</string>
+    <string name="favoriteDeleted">Favoriet verwijderd</string>
 </resources>

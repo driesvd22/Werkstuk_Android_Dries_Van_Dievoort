@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         appDatabase = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, DATABASE_NAME)
                 .fallbackToDestructiveMigration()
                 .build();
+        new setupDBasync().execute();
 
         btnlogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,12 +79,11 @@ public class MainActivity extends AppCompatActivity {
                 }).create().show();
     }
 
-    private class validateUserAsync extends AsyncTask<String,Integer,Integer>
+    private class setupDBasync extends AsyncTask<String,Integer,Integer>
     {
-        User user;
         @Override
         protected Integer doInBackground(String... strings) {
-            /*List<Category> list = new ArrayList<>();
+            List<Category> list = new ArrayList<>();
             list.add(new Category(getString(R.string.FingerFoods), R.drawable.fingerfoods));
             list.add(new Category(getString(R.string.Traditional), R.drawable.traditional));
             list.add(new Category(getString(R.string.Chinese), R.drawable.chinese));
@@ -91,7 +91,25 @@ public class MainActivity extends AppCompatActivity {
             list.add(new Category(getString(R.string.Pizza), R.drawable.pizza));
             list.add(new Category(getString(R.string.Vegetarian), R.drawable.vegetarian));
             list.add(new Category(getString(R.string.Pasta), R.drawable.pasta));
-            appDatabase.categoryDAO().insertCategory(list.get(0),list.get(1),list.get(2),list.get(3),list.get(4),list.get(5),list.get(6));*/
+            List<Category> getAllList = new ArrayList<>();
+            getAllList = appDatabase.categoryDAO().getAll();
+            if (getAllList.isEmpty() || getAllList == null)
+            {
+                appDatabase.categoryDAO().insertCategory(list.get(0),list.get(1),list.get(2),list.get(3),list.get(4),list.get(5),list.get(6));
+                return 1;
+            }
+            else {
+                return 1;
+            }
+        }
+    }
+
+
+    private class validateUserAsync extends AsyncTask<String,Integer,Integer>
+    {
+        User user;
+        @Override
+        protected Integer doInBackground(String... strings) {
             String ik = appDatabase.userDao().checkIfUserExists(strings[0], strings[1]);
             if (ik == null)
             {

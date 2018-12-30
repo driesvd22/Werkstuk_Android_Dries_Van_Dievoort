@@ -15,6 +15,9 @@ public interface CategoryDAO {
     @Query("SELECT * FROM category")
     List<Category> getAll();
 
+    @Query("SELECT * FROM category where name = :categoryName")
+    Category getCategoryByName(String categoryName);
+
     @Insert
     void insertCategory(Category... categories);
 

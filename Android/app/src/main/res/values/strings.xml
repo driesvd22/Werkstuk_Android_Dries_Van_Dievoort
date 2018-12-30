@@ -52,4 +52,8 @@
     <string name="restaurants">Show Restaurants</string>
     <string name="PermissionDenied">Permission Denied</string>
     <string name="NearbyRestaurants">Showing Nearby Restaurants</string>
+    <string name="favorite">Favorite</string>
+    <string name="categorythumbnail">category picture</string>
+    <string name="favoriteSaved">Favorite saved</string>
+    <string name="favoriteDeleted">Favorite deleted</string>
 </resources>

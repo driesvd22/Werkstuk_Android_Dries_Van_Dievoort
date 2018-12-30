@@ -1,9 +1,11 @@
 package com.example.driesvandievoort.android;
 
 import android.Manifest;
+import android.arch.persistence.room.Room;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -18,7 +20,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.driesvandievoort.android.Database.AppDatabase;
+import com.example.driesvandievoort.android.Entities.Favorite;
+import com.example.driesvandievoort.android.Entities.User;
 import com.example.driesvandievoort.android.Places.PlacesData;
+import com.example.driesvandievoort.android.Varia.CurrentUser;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationRequest;
@@ -47,6 +53,8 @@ public class CategoryActivity extends FragmentActivity
     public static final int REQUEST_LOCATION_CODE = 99;
     int PROXIMITY_RADIUS = 3000;
     double latitude,longitude;
+    private static final String DATABASE_NAME = "app_db";
+    public AppDatabase appDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +67,10 @@ public class CategoryActivity extends FragmentActivity
         Intent intent = getIntent();
         String Title = intent.getExtras().getString("Title");
         int Image = intent.getExtras().getInt("Image");
+
+        appDatabase = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, DATABASE_NAME)
+                .fallbackToDestructiveMigration()
+                .build();
 
         categoryTitle.setText(Title);
         imageView.setImageResource(Image);
@@ -187,6 +199,49 @@ public class CategoryActivity extends FragmentActivity
 
         }
     }
+
+    public void onClickFavorite(View view)
+    {
+        new favoriteTask().execute();
+    }
+
+
+
+    private class favoriteTask extends AsyncTask<String,Integer,Integer> {
+        @Override
+        protected Integer doInBackground(String... strings) {
+            Intent intent = getIntent();
+            String Title = intent.getExtras().getString("Title");
+            int Image = intent.getExtras().getInt("Image");
+            Favorite favorite = new Favorite(CurrentUser.currentUser.getUsername(), Title);
+            Favorite getFavorite = appDatabase.favoriteDAO().getFavorite(favorite.getUsername(), favorite.getCategoryName());
+            if (getFavorite == null) {
+                appDatabase.favoriteDAO().insertFavorite(favorite);
+                return 1;
+            } else if (getFavorite.getCategoryName().equals(favorite.getCategoryName()) && getFavorite.getUsername().equals(favorite.getUsername())) {
+                appDatabase.favoriteDAO().deleteFavorite(getFavorite);
+                return 0;
+            } else {
+                return 0;
+            }
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            super.onProgressUpdate(values[0]);
+        }
+
+        @Override
+        protected void onPostExecute(Integer integer) {
+            if (integer == 1) {
+                Toast.makeText(getApplicationContext(), getString(R.string.favoriteSaved), Toast.LENGTH_SHORT).show();
+            } else if (integer == 0) {
+                Toast.makeText(getApplicationContext(), getString(R.string.favoriteDeleted), Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+
 
     public void onClick(View v)
     {
