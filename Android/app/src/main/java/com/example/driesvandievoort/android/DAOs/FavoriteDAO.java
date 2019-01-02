@@ -14,7 +14,7 @@ import java.util.List;
 @Dao
 public interface FavoriteDAO {
     @Query("SELECT * FROM favorite where username = :username")
-    List<Favorite> getAll(String username);
+    List<Favorite> getAllWhereUserIs(String username);
 
     @Query("SELECT * FROM favorite where username = :username AND categoryName = :categoryName")
     Favorite getFavorite(String username, String categoryName);

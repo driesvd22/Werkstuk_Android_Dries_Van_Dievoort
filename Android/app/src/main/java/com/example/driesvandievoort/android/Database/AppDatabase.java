@@ -12,7 +12,7 @@ import com.example.driesvandievoort.android.Entities.Category;
 import com.example.driesvandievoort.android.Entities.Favorite;
 import com.example.driesvandievoort.android.Entities.User;
 
-@Database(entities = {User.class, Category.class, Favorite.class}, version = 3, exportSchema = false)
+@Database(entities = {User.class, Category.class, Favorite.class}, version = 4, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static AppDatabase INSTANCE;

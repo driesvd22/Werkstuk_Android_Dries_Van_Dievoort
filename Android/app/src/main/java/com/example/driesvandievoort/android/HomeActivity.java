@@ -115,7 +115,8 @@ public class HomeActivity extends AppCompatActivity
             Intent intent = new Intent(HomeActivity.this,MapActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_Favorites) {
-
+            Intent intent = new Intent(HomeActivity.this,FavoriteActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_logout) {
             Intent intent = new Intent(HomeActivity.this,MainActivity.class);
             startActivity(intent);
