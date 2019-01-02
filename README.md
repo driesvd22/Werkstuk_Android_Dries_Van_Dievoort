@@ -1,2 +1,2 @@
 # Werkstuk_Android_Dries_Van_Dievoort
-Werkstuk voor examen Mobile apps: Android voorErasmushogeschool Brussel
+Werkstuk Mobile apps: Android voor Erasmushogeschool Brussel
